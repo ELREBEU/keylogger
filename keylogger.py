@@ -19,5 +19,3 @@ while True:
 
     print("Commence à envoyer le mail") # A enlever plus tard
     sendMail()
-
-
