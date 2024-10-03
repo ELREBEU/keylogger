@@ -2,7 +2,7 @@
 pip install pynput
 pip install logging #installation de la librairie logging
 pip install pynput #installation de la librairie pynput
-pip install requests #installation de la librairie requests
+
 
 
 
