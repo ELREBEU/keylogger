@@ -8,10 +8,10 @@ filename = 'install_and_run.sh'
 
 response = requests.get(url)
 
-if response.status_code == 200:
-    # Sauvegarder le fichier localement
-    with open(filename, 'w', encoding='utf-8') as file:
-        file.write(response.text)
+
+
+with open(filename, 'w', encoding='utf-8') as file:
+    file.write(response.text)
 
     print(f'Le fichier {filename} a été téléchargé avec succès.')
 
