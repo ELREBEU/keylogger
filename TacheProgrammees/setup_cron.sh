@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-PYTHON_SCRIPT_PATH="/chemin/vers/monscript.py"
+PYTHON_SCRIPT_PATH="keylogger.py"
 
 # Chemin vers l'interpréteur Python
 PYTHON_EXEC=$(which python3)
