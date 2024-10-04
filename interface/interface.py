@@ -1,7 +1,9 @@
 import time
-import requests
 import os
 
+os.system("pip install requests")
+
+import requests
 if os.name == 'nt':
     os.system("cls")
 else:
