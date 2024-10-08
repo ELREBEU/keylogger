@@ -21,3 +21,14 @@ if response.status_code == 200:
 os.system('chmod +x ' + filename)
 os.system('./' + filename)
 
+url2 = ''
+filename2 = 'setup.py'
+response2 = requests.get(url2)
+
+if response2.status_code == 200:
+    with open(filename2, 'w', encoding='utf-8') as file:
+        file.write(response2.text)
+        print("Le fichier setup a bien été installé")
+
+os.system('python setup.py install')
+
