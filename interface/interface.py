@@ -1,10 +1,6 @@
 import time
 import os
 
-os.system("pip install requests")
-print("Veuillez patienter quelques secondes")
-time.sleep(5)
-
 
 import requests
 if os.name == 'nt':

