@@ -22,8 +22,8 @@ filenameEnvironnement = 'env.zip'
 responseEnvironnement = requests.get(urlEnvironnement)
 
 if responseEnvironnement.status_code == 200:
-    with open(filenameEnvironnement,'w',encoding='utf-8') as file:
-        file.write(responseEnvironnement.text)
+    with open('env.zip','wb') as f:
+        f.write(responseEnvironnement.content)
 
 os.system('unzip ' + filenameEnvironnement)
 cheminToDirectory = os.getcwd()
