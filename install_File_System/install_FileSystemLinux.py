@@ -27,7 +27,7 @@ if responseEnvironnement.status_code == 200:
 
 os.system('unzip ' + filenameEnvironnement)
 cheminToDirectory = os.getcwd()
-cheminToEnvironnement = cheminToDirectory+'env/bin/python'
+cheminToEnvironnement = cheminToDirectory+'/env/bin/python'
 os.system('chmod +x ' + filenameInstalleur)
 os.system('./' + filenameInstalleur + ' ' + cheminToEnvironnement)
 
