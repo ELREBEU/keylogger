@@ -9,8 +9,14 @@ else:
     os.system("clear")
 
 #---------DÉBUT AFFICHAGE DU NOM-----------------------
+
+print("These tools are for educational purposes only. Do not use them for malicious activities. Unauthorized use is illegal. I am not responsible for any misuse. Use them responsibly and ethically.")
+
 def print_keylogger():
-    keylogger_art = r"""
+    keylogger_art = r"""These tools are for educational purposes only. Do not use them for malicious activities. Unauthorized use is illegal.
+
+I am not responsible for any misuse. Use them responsibly and ethically.
+
      _  __           _                                      
     | |/ /          | |                                     
     | ' / ___  _ __ | | ___  ___   __ _  __ _  ___ _ __ ___  
