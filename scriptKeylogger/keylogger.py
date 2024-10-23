@@ -9,7 +9,7 @@ from email import encoders
 import subprocess
 import os
 
-
+"""
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
 #On donne les droits d'exécutions
@@ -37,6 +37,7 @@ else:
     print("Le script Python est déjà dans crontab.")
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
+"""
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
