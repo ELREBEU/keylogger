@@ -1,49 +1,79 @@
+import logging
 from pynput import mouse
 import time
 
-# the mouse move handler will get passed the screen space coordinates that the mouse
-# has moved to,
-# you may notice that all mouse callbacks will give you the mouse position
+# Configure le fichier de log et le crée dès le lancement du programme
+logging.basicConfig(
+    filename="mouse.txt",
+    filemode='w',
+    datefmt='%I:%M:%S %p',
+    format='%(asctime)s - %(message)s',
+    level=logging.DEBUG
+)
+logging.debug("Mouse tracking started.")  # Message initial pour marquer le début de la traçabilité
+
+previous_position = (0, 0)  # Initialisation de la position précédente pour le calcul de la direction
+
+
 def on_mouse_move(mouse_position_x, mouse_position_y):
-  print("The mouse has moved to (%s, %s)"%(mouse_position_x, mouse_position_y))
+    global previous_position
+    x_prev, y_prev = previous_position
+    direction = ""
 
-# so the mouse scroll callback will give you 2 sets of scroll changes, one for the x
-# axis and one for the y. Most of the time the one you care about is the y axis change
+    if mouse_position_x > x_prev:
+        direction += "right "
+    elif mouse_position_x < x_prev:
+        direction += "left "
+    if mouse_position_y > y_prev:
+        direction += "down"
+    elif mouse_position_y < y_prev:
+        direction += "up"
+
+    previous_position = (mouse_position_x, mouse_position_y)  # Mise à jour de la position
+
+    message = f"The mouse has moved to ({mouse_position_x}, {mouse_position_y}) - Direction: {direction.strip()}"
+    print(message)
+    logging.debug(message)
+
+"""
 def on_mouse_scroll(mouse_position_x, mouse_position_y, scroll_x_change, scroll_y_change):
-  if scroll_x_change < 0:
-    print("user is scrolling to the left")
-  elif scroll_x_change > 0:
-    print("user is scrolling to the right")
-  if scroll_y_change > 0:
-    print("user is scrolling up the page")
-  elif scroll_y_change < 0:
-    print("user is scrolling down the page")
-    print("scroll change deltas: ", scroll_x_change, scroll_y_change)
+    message = ""
+    if scroll_x_change < 0:
+        message = "User is scrolling to the left"
+    elif scroll_x_change > 0:
+        message = "User is scrolling to the right"
+    if scroll_y_change > 0:
+        message = "User is scrolling up the page"
+    elif scroll_y_change < 0:
+        message = "User is scrolling down the page"
 
-# the mouse click callback will give you the button pressed and its status, the
-# callback will be triggered once when the button is pushed and again when released
-# the is_pressed will tell you which state it's in
-# there are several types of buttons it can recognize, but for the most part
-# you'll just need the main 3: left, right and middle
+    print(message)
+    logging.debug(message)
+    logging.debug(f"Scroll change deltas: {scroll_x_change}, {scroll_y_change}")
+    """
+
+
 def on_mouse_click(mouse_position_x, mouse_position_y, button, is_pressed):
-  # example of how to listen for a specific button
-  if button == mouse.Button.middle and is_pressed:
-    print("middle mouse button pressed! it's special!")
-  else:
-    print("Mouse button pressed: ", button)
-    print("Mouse button is pressed?: ", is_pressed)
+    if button == mouse.Button.middle and is_pressed:
+        message = "Middle mouse button pressed! It's special!"
+    else:
+        message = f"Mouse button pressed: {button} | Is pressed: {is_pressed}"
 
-# create a listener and setup our call backs
+    print(message)
+    logging.debug(message)
+
+
+# Crée un listener pour la souris
 mouse_listener = mouse.Listener(
-        on_move=on_mouse_move,
-        on_scroll=on_mouse_scroll,
-        on_click=on_mouse_click)
+    on_move=on_mouse_move,
+    #on_scroll=on_mouse_scroll,
+    on_click=on_mouse_click
+)
 
-# start the listener
-print("starting the mouse listener, will be active for 5 seconds...")
+# Démarre le listener
+print("Starting the mouse listener, will be active for 5 seconds...")
 mouse_listener.start()
-# let the main thread sleep for 5 seconds, then stop the listener
-time.sleep(5)
+time.sleep(5)  # Laisse le script dormir pendant 5 secondes
 print("Time's up, stopping the mouse listener")
 mouse_listener.stop()
 mouse_listener.join()

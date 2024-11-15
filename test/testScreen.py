@@ -1,3 +1,7 @@
 import PIL.ImageGrab
+import os
+
 screen=PIL.ImageGrab.grab()
-screen.save("/home/daoudi/Documents/outil_hack/keylogger/test/screen.png")
+path = os.getcwd()
+path +="/screen.png"
+screen.save(path)

