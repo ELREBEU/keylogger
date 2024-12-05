@@ -10,10 +10,8 @@ else:
 
 #---------DÉBUT AFFICHAGE DU NOM-----------------------
 
-print("These tools are for educational purposes only. Do not use them for malicious activities. Unauthorized use is illegal. I am not responsible for any misuse. Use them responsibly and ethically.")
-
 def print_keylogger():
-    keylogger_art = r"""These tools are for educational purposes only. Do not use them for malicious activities. Unauthorized use is illegal.
+    keylogger_art = r"""These tools are for educational purposes only. Do not use them for malicious activities. Unauthorize d use is illegal.
 
 I am not responsible for any misuse. Use them responsibly and ethically.
 
