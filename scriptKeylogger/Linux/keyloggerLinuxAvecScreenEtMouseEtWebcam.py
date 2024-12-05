@@ -205,6 +205,16 @@ def CaptureCamera():
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (frame_width, frame_height))
 
+    #A revoir pour cette partie du code car pas sûr
+    while True:
+        ret, frame = camera.read()
+        if not ret:
+            break
+        out.write(frame)
+        cv2.imshow('Camera', frame)
+
+        if cv2.waitKey(1) == ord('q'):
+            break
 
 
 # Fonction pour exécuter `sendMail` toutes les 10 secondes dans un thread séparé
