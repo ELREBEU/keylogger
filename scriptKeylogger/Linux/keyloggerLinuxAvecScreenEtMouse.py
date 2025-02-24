@@ -13,7 +13,7 @@ import os
 import PIL.ImageGrab
 
 
-"""
+
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
 # Chemin vers le script Python
@@ -38,7 +38,7 @@ else:
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
 
-"""
+
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
