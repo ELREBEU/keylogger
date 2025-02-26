@@ -37,7 +37,7 @@ print_keylogger()
 #----------DÉBUT RÉCOLTE INFOS DES MACHINES----------------
 
 
-systemeExploitation = int(input("Votren cible est sur windows ou linux ? Tapez 1 pour windows ou 2 pour linux\n"))
+systemeExploitation = int(input("Votre cible est sur windows ou linux ? Tapez 1 pour windows ou 2 pour linux\n"))
 
 while systemeExploitation!=1 and systemeExploitation!=2:
     systemeExploitation = int(input("Veuillez choisir 1 pour windows ou 2 pour linux"))

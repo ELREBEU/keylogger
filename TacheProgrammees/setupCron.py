@@ -1,10 +1,9 @@
 import os
 import subprocess
 
-def setupCron():
+def setupCron(filename):
     # Chemin vers le script Python
 
-    filename = os.path.basename(__file__)
     python_script = os.getcwd() + "/" + filename
 
     # Commande crontab pour exécuter le script Python au démarrage
