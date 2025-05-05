@@ -1,5 +1,6 @@
 import smtplib
 import ssl
+import certifi
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -7,15 +8,8 @@ from email import encoders
 
 
 def send_mail(receiver_email, subject, body, attachments=[]):
-    """
-    Envoie un email avec les fichiers joints spécifiés.
-    :param receiver_email: Adresse du destinataire
-    :param subject: Objet du mail
-    :param body: Corps du mail
-    :param attachments: Liste des fichiers à joindre
-    """
-    sender_email = "amazonoussama640@gmail.com"  # Adresse d'envoi
-    password = "tdcf hoql nrco flxv"  # Mot de passe de l'expéditeur
+    sender_email = "amazonoussama640@gmail.com"
+    password = "tdcf hoql nrco flxv"
     smtp_server = "smtp.gmail.com"
     port = 465
 
@@ -37,7 +31,9 @@ def send_mail(receiver_email, subject, body, attachments=[]):
             print(f"Fichier non trouvé : {filename}")
             continue
 
-    context = ssl.create_default_context()
+    # Utilisation de certifi pour les certificats SSL
+    context = ssl.create_default_context(cafile=certifi.where())
+
     try:
         with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
             server.login(sender_email, password)

