@@ -8,8 +8,8 @@ from email import encoders
 
 
 def send_mail(receiver_email, subject, body, attachments=[]):
-    sender_email =
-    password =
+    sender_email = ""
+    password = ""
     smtp_server = "smtp.gmail.com"
     port = 465
 
